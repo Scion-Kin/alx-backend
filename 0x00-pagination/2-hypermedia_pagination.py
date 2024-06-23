@@ -38,9 +38,11 @@ class Server:
         ''' A more descriptive return than get_page() method '''
 
         got = self.get_page(page, page_size)
+        start, end = index_range(page, page_size)
+
         return {
             "page_size": len(got), "page": page, "data": got,
-            "next_page": page + 1 if len(got) > 0 else None,
+            "next_page": page + 1 if end < len(self.__dataset) else None,
             "prev_page": page - 1 if page > 0 else None,
             "total_pages": math.ceil(len(self.__dataset) / page_size),
         }
