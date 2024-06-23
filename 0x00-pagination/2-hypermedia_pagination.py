@@ -3,7 +3,7 @@
 
 import csv
 import math
-from typing import List, Dict
+from typing import List
 
 
 class Server:
@@ -34,11 +34,12 @@ class Server:
 
         return self.dataset()[indexes[0]:indexes[1]]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         ''' A more descriptive return than get_page() method '''
 
         return {
-            "page_size": page_size, "page": page,
+            "page_size": page_size,
+            "page": (page * page_size) - page_size,
             "data": self.get_page(page, page_size),
             "next_page": page + 1 if len(self.__dataset) > page else None,
             "prev_page": page - 1 if page > 1 else None,
