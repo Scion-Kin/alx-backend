@@ -7,11 +7,6 @@ from base_caching import BaseCaching as Base
 class LIFOCache(Base):
     ''' Improves the base class '''
 
-    def __init__(self):
-        ''' Initializes the instance '''
-
-        super().__init__()
-
     def put(self, key, item):
         ''' This insert an item into the cache '''
 
