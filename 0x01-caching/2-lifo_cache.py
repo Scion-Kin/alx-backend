@@ -25,7 +25,6 @@ class LIFOCache(Base):
                 last_in = [i for i in self.cache_data.items()][-2][0]
                 print("DISCARD: {}".format(last_in))
                 del self.cache_data[last_in]
-                
 
     def get(self, key):
         ''' This retrieves an item from the cache '''
