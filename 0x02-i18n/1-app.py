@@ -3,6 +3,7 @@
 
 from flask import Flask, render_template
 from flask_babel import Babel
+from typing import Callable
 
 
 class Config:
@@ -16,10 +17,10 @@ babel = Babel(app, Config.LANGUAGES)
 
 
 @app.route('/')
-def home():
+def home() -> Callable:
     ''' This is the index route '''
 
-    return render_template('0-index.html')
+    return render_template('1-index.html')
 
 
 if __name__ == "__main__":
