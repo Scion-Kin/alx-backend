@@ -2,7 +2,7 @@
 ''' This contains a flask application '''
 
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, gettext
 from typing import Callable
 
 
@@ -20,7 +20,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale() -> Callable:
+def get_locale() -> str:
     ''' gets the preferred language of a user '''
 
     return request.accept_languages.best_match(app.config['LANGUAGES'])
@@ -30,7 +30,9 @@ def get_locale() -> Callable:
 def home() -> Callable:
     ''' This is the index route '''
 
-    return render_template('1-index.html')
+    return render_template('1-index.html',
+                           home_title=gettext("Welcome to Holberton"),
+                           home_header=gettext("Hello world"))
 
 
 if __name__ == "__main__":
