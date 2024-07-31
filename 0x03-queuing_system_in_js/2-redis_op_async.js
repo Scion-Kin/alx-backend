@@ -9,10 +9,10 @@ function setNewSchool(schoolName, value) {
     client.set(schoolName, value, print);
 }
 
-async function displaySchoolValue(schoolName) {
-    await client.get(schoolName, (error, response) => {
-        if (!error) console.log(response);
-    });
+function displaySchoolValue(schoolName) {
+  client.get(schoolName, (error, response) => {
+    if (!error) console.log(response);
+  });
 }
 
 displaySchoolValue('Holberton');
