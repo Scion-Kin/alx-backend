@@ -1,5 +1,5 @@
 const kue = require('kue');
-const queue = kue.createQueue({ name: 'push_notification_code_2' });
+const queue = kue.createQueue();
 
 const jobs = [];
 const phones = ['4153518780', '4153518781', '4153518743', '4153538781', '4153118782', '4153718781', '4159518782',
