@@ -22,11 +22,11 @@ describe('createPushNotificationsJobs', () => {
 
   it('displays an error message if jobs is not an array', () => {
     expect(
-      createPushNotificationsJobs.bind(createPushNotificationsJobs, {}, QUEUE)
+      createPushNotificationsJobs.bind(createPushNotificationsJobs, {}, QUEUE),
     ).to.throw('Jobs is not an array');
   });
 
-  it('adds jobs to the queue with the correct type', (done) => {
+  it('adds jobs to the queue with the correct type', () => new Promise((done) => {
     expect(QUEUE.testMode.jobs.length).to.equal(0);
     const jobInfos = [
       {
@@ -45,42 +45,42 @@ describe('createPushNotificationsJobs', () => {
     QUEUE.process('push_notification_code_3', () => {
       expect(
         spy.log
-          .calledWith(`Notification job created: ${QUEUE.testMode.jobs[0].id}`)
+          .calledWith(`Notification job created: ${QUEUE.testMode.jobs[0].id}`),
       ).to.be.true;
       done();
     });
-  });
+  }));
 
-  it('registers the progress event handler for a job', (done) => {
+  it('registers the progress event handler for a job', () => new Promise((done) => {
     QUEUE.testMode.jobs[0].addListener('progress', () => {
       expect(
         spy.log
-          .calledWith(`Notification job ${QUEUE.testMode.jobs[0].id} 25% complete`)
+          .calledWith(`Notification job ${QUEUE.testMode.jobs[0].id} 25% complete`),
       ).to.be.true;
       done();
     });
     QUEUE.testMode.jobs[0].emit('progress', 25);
-  });
+  }));
 
-  it('registers the failed event handler for a job', (done) => {
+  it('registers the failed event handler for a job', () => new Promise((done) => {
     QUEUE.testMode.jobs[0].addListener('failed', () => {
       expect(
         spy.log
-          .calledWith(`Notification job ${QUEUE.testMode.jobs[0].id}, failed: Failed to send`)
+          .calledWith(`Notification job ${QUEUE.testMode.jobs[0].id}, failed: Failed to send`),
       ).to.be.true;
       done();
     });
     QUEUE.testMode.jobs[0].emit('failed', new Error('Failed to send'));
-  });
+  }));
 
-  it('registers the complete event handler for a job', (done) => {
+  it('registers the complete event handler for a job', () => new Promise((done) => {
     QUEUE.testMode.jobs[0].addListener('complete', () => {
       expect(
         spy.log
-          .calledWith(`Notification job ${QUEUE.testMode.jobs[0].id} completed`)
+          .calledWith(`Notification job ${QUEUE.testMode.jobs[0].id} completed`),
       ).to.be.true;
       done();
     });
     QUEUE.testMode.jobs[0].emit('complete');
-  });
+  }));
 });

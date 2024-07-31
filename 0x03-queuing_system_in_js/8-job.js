@@ -2,7 +2,7 @@ export default function createPushNotificationsJobs(jobs, queue) {
   if (!(jobs instanceof Array)) {
     throw new Error('Jobs is not an array');
   }
-  jobs.forEach(element => {
+  jobs.forEach((element) => {
     const job = queue.create('push_notification_code_3', element);
     job
       .on('enqueue', () => {
