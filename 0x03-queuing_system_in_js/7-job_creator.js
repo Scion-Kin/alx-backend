@@ -1,5 +1,5 @@
 const kue = require('kue');
-const queue = kue.createQueue();
+const queue = kue.createQueue({ name: 'push_notification_code_2' });
 
 const jobs = [];
 const phones = ['4153518780', '4153518781', '4153518743', '4153538781', '4153118782', '4153718781', '4159518782',
@@ -13,7 +13,7 @@ for (let i = 0; i < phones.length; i++) {
   })
 }
 
-for (const obj in jobs) {
+for (const obj of jobs) {
   const job = queue.create('push_notification_code_2', obj);
   job
     .on('enqueue', () => {
